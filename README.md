@@ -3,7 +3,7 @@ This repo contains a pipeline for:
 1. Preprocessing
 2. Statistical analysis
 
-of ERP data. The pipeline is implemented in MATLAB and depends on the freely available EEGLab for preprocessing and Fieldtrip for statistical analysis.
+of ERP dataaa. The pipeline is implemented in MATLAB and depends on the freely available EEGLab for preprocessing and Fieldtrip for statistical analysis.
 
 ### Pre-processing
 1. Re-referencing
