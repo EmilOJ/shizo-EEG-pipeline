@@ -1,9 +1,9 @@
-function [] = GA_inspect(experiment, channels, alignment)
+function [] = GA_inspect(experiment, channels)
    add_filedtrip_path();
    cfg = initialize_participant_cfg(experiment, 2);
    
-   gram = load([cfg.ERPdir 'gram_GA_' alignment '.mat']);
-   lex = load([cfg.ERPdir 'lex_GA_' alignment '.mat']);
+   standardball = load([cfg.ERPdir 'standardball_GA.mat']);
+   oddball = load([cfg.ERPdir 'oddball_GA.mat']);
    
    
   
@@ -11,18 +11,18 @@ function [] = GA_inspect(experiment, channels, alignment)
    figure;
    for j = 1:2
        if j == 1
-           plot_title = 'Grammatical condition';
-           y = gram.grandavg.avg;
-           time = gram.grandavg.time;
+           plot_title = 'Standardball condition';
+           y = standardball.grandavg.avg;
+           time = standardball.grandavg.time;
        else
-           plot_title = 'Lexical condition';
-           y = lex.grandavg.avg;
-           time = lex.grandavg.time;
+           plot_title = 'Oddball condition';
+           y = oddball.grandavg.avg;
+           time = oddball.grandavg.time;
        end
        subplot(2,1,j);
        
        for i=1:size(y,1)
-           plot(time, y(i,:));%-mean(y(i,:),2));
+           plot(time, y(i,:))% - y(i,1));%-mean(y(i,:),2));
            hold on;
        end
        axis tight;
@@ -31,38 +31,41 @@ function [] = GA_inspect(experiment, channels, alignment)
 %            xlim([2 3]);
 %        end
 %        ylim([-2 2])
+       ylim([-5 6]);
        title(plot_title);
        hold off;
+       grid on;
        set(gca,'Ydir','reverse');
+       xlabel('time [s]');
    end
 
    
 %    
-   cfg.showlabels  = 'yes';
-   cfg.layout      = 'biosemi128.lay';
-   
-   legend('gram','lex');
-   cfg.showlabels  = 'yes';
-   cfg.layout      = 'biosemi128.lay';
-   %Baseline correction
-%    if strcmp(alignment, 'stim')
-%     cfg.xlim        = [2 3];
-%    end
-   figure; ft_multiplotER(cfg, gram.grandavg, lex.grandavg);
-   legend('gram','lex');
+%    cfg.showlabels  = 'yes';
+% %    cfg.layout      = 'biosemi128.lay';
+%    
+%    legend('gram','lex');
+%    cfg.showlabels  = 'yes';
+% %    cfg.layout      = 'biosemi128.lay';
+%    %Baseline correction
+% %    if strcmp(alignment, 'stim')
+% %     cfg.xlim        = [2 3];
+% %    end
+%    figure; ft_multiplotER(cfg, standardball.grandavg, oddball.grandavg);
+%    legend('standardball','oddball');
    
    figure; counter = 1;
    for chan = channels
        subplot(length(channels),1,counter);
        cfg.channel = chan;
-       ft_singleplotER(cfg, gram.grandavg, lex.grandavg);
+       ft_singleplotER(cfg, standardball.grandavg, oddball.grandavg);
        set(gca,'Ydir','reverse');
-       legend('gram','lex');
+       legend('standardball','oddball');
        counter = counter + 1;
    end
    
-   clear gram;
-   clear lex;
+   clear standardball;
+   clear oddball;
    
  
     

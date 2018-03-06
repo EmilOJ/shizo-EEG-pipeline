@@ -63,8 +63,6 @@ function [trl, event] = my_trialfun(cfg)
     trl = [trl_begin trl_end offset]; 
     
     %% Remove previously rejected trials
-    
-    
     trials_to_reject = cfg.proc_data.(cfg.subjectstr).rejecttrial.(cfg.condition);
     number_of_trials_to_reject = length(trials_to_reject);
     

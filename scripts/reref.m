@@ -10,8 +10,8 @@ function [] = reref(experiment, participant)
             cfg.outputfile = [cfg.files.ICA_pruned_filtered_artifacts_rejected_interpolated_ icondition '_' ialignment]
 
             cfg.reref = 'yes';
-            cfg.refchannel = 1:128;
-            cfg.channel = 1:128;
+            cfg.refchannel = 1:26;
+            cfg.channel = 1:26;
 
             ft_preprocessing(cfg);
         end

@@ -1,16 +1,16 @@
 function [] = my_filter(experiment, participant, ICA)    
     add_filedtrip_path();
-    cfg = initialize_participant_cfg(experiment, participant);
+    cfg = initialize_participant_cfg(experiment, participant, ICA);
     if ICA
         cfg.inputfile   = [cfg.subjectdir cfg.subjectstr '_ICApruned.mat']; 
         cfg.outputfile  = [cfg.subjectdir cfg.subjectstr '_ICApruned_filtered.mat'];
     else
-        cfg.dataset = [cfg.subjectdir cfg.subjectstr '.bdf'];
+        cfg.inputfile = cfg.files.raw_mat
         cfg.outputfile = cfg.files.raw_filtered;
     end
         
     
-    cfg.channel     = 1:128;
+    cfg.channel     = [1:24, 26];
     
     %% Filter
     % Lange (2015): 0.2-30 Hz bandpass

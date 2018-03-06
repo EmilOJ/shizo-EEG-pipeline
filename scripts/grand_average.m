@@ -1,19 +1,20 @@
-function [] = grand_average(experiment, subjects, alignment)
+function [] = grand_average(experiment, subjects)
    
    add_filedtrip_path();
-   cfg = initialize_participant_cfg(experiment, 2);
+   cfg = initialize_participant_cfg(experiment, '1001');
     
    counter = 1;
-   for subject = subjects
+   for i = 1:length(subjects)
+       subject = subjects{i};
        
-           avg_gram{counter} = compute_ERP_avg(experiment, subject, 'gram', alignment);
-           avg_lex{counter} = compute_ERP_avg(experiment, subject, 'lex', alignment);
+           avg_standardball{counter} = compute_ERP_avg(experiment, subject, 'standardball');
+           avg_oddball{counter} = compute_ERP_avg(experiment, subject, 'oddball');
            counter = counter +1 ;
       
    end
    
-   save([cfg.ERPdir 'gram_averages_' alignment '.mat'], 'avg_gram');
-   save([cfg.ERPdir 'lex_averages_' alignment '.mat'], 'avg_lex');
+   save([cfg.ERPdir 'standardball_averages.mat'], 'avg_standardball');
+   save([cfg.ERPdir 'oddball_averages.mat'], 'avg_oddball');
    
  
    
@@ -34,10 +35,10 @@ function [] = grand_average(experiment, subjects, alignment)
 
 
    
-   cfg.outputfile = [cfg.ERPdir 'gram_GA_' alignment '.mat'];
-   avg_gram = ft_timelockgrandaverage(cfg, avg_gram{:});
+   cfg.outputfile = [cfg.ERPdir 'standardball_GA.mat'];
+   ft_timelockgrandaverage(cfg, avg_standardball{:});
    
-   cfg.outputfile = [cfg.ERPdir 'lex_GA_' alignment ];
-   avg_lex = ft_timelockgrandaverage(cfg, avg_lex{:});
+   cfg.outputfile = [cfg.ERPdir 'oddball_GA.mat'];
+   ft_timelockgrandaverage(cfg, avg_oddball{:});
    
 end

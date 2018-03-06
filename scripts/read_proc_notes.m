@@ -1,24 +1,22 @@
-function proc_data = read_proc_notes(experiment, ICA)
+function proc_data = read_proc_notes(ICA)
     [my_root, my_fieldtrip_path] = my_config();
     cfg                         = [];
     cfg.rootdir                 = [my_root filesep];
-    cfg.datadir                 = [cfg.rootdir 'EEG-' experiment filesep];
+    cfg.datadir                 = [cfg.rootdir 'data' filesep 'Nicolet' filesep];
     
     if ICA
         [num, txt, raw] = xlsread([cfg.datadir 'proc_notes_article.xlsx']);
     else
-        [num, txt, raw] = xlsread([cfg.datadir 'proc_notes_article2.xlsx']);
+        [num, txt, raw] = xlsread([cfg.datadir 'proc_notes.xlsx']);
     end
     
-    for i = 2:31
+    for i = 2:17
         subjstr = raw{i,1};
-        assign_data(3,'bad_channel');
-        assign_data(4,'eye_blink_comp');
-        assign_data(5,'eye_mov_comp');
-        assign_data(12,{'missingchan', 'gram'}, 'c');
-        assign_data(13,{'missingchan', 'lex'}, 'c');
-        assign_data(10,{'rejecttrial', 'gram'});
-        assign_data(11,{'rejecttrial', 'lex'});
+        assign_data(2,'data_available');
+        assign_data(3,'standardball_range');
+        assign_data(4,'oddball_range');
+        assign_data(5,'bad_trials_standardball');
+        assign_data(6,'bad_trials_oddball');
     end
     
     
