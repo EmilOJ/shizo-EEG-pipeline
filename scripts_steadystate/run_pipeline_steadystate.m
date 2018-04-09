@@ -1,13 +1,12 @@
 clc; close all; clear all;
 add_filedtrip_path()
 
-experiment = 'oddball';
 participants = {...
-%     '1001'
-%     '1003'
-%     '1004'
-%     '1005'
-%     '1006'
+    '1001'
+    '1003'
+    '1004'
+    '1005'
+    '1006'
     '1007'
     '1008'
     '1009'
@@ -23,7 +22,7 @@ for i = 1:length(participants)
     participant = participants(i);
     participant = participant{1}
     disp(['Processing participant ' participant '...']);
-    cfg = initialize_participant_cfg(experiment, participant, ICA);
+    cfg = initialize_participant_cfg(participant, ICA);
     
     if ~cfg.proc_data.(cfg.subjectstr).data_available
         continue

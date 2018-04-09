@@ -5,9 +5,9 @@ function proc_data = read_proc_notes(ICA)
     cfg.datadir                 = [cfg.rootdir 'data' filesep 'Nicolet' filesep];
     
     if ICA
-        [num, txt, raw] = xlsread([cfg.datadir 'proc_notes_article.xlsx']);
+        [num, txt, raw] = xlsread('proc_notes_article.xlsx');
     else
-        [num, txt, raw] = xlsread([cfg.datadir 'proc_notes.xlsx']);
+        [num, txt, raw] = xlsread('proc_notes.xlsx');
     end
     
     for i = 2:17
