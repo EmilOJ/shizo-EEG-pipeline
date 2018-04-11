@@ -13,10 +13,10 @@ function proc_data = read_proc_notes(ICA)
     for i = 2:17
         subjstr = raw{i,1};
         assign_data(2,'data_available');
-        assign_data(3,'standardball_range');
-        assign_data(4,'oddball_range');
-        assign_data(5,'bad_trials_standardball');
-        assign_data(6,'bad_trials_oddball');
+        assign_data(3,'eyes_closed_start');
+        assign_data(4,'eyes_closed_stop');
+        assign_data(5,'eyes_open_start');
+        assign_data(6,'eyes_open_stop');
     end
     
     

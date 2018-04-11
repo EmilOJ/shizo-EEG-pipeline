@@ -3,44 +3,46 @@ add_filedtrip_path()
 
 participants = {...
     '1001'
-    '1003'
-    '1004'
-    '1005'
-    '1006'
-    '1007'
-    '1008'
-    '1009'
-    '1011'
-    '1012'
-    '1014'    
+%     '1003'
+%     '1004'
+%     '1005'
+%     '1006'
+%     '1007'
+%     '1008'
+%     '1009'
+%     '1011'
+%     '1012'
+%     '1014'    
 };
     
 ICA = false;
-
+experiment = 'eyes_closed';
 
 for i = 1:length(participants)
     participant = participants(i);
-    participant = participant{1}
-    disp(['Processing participant ' participant '...']);
-    cfg = initialize_participant_cfg(participant, ICA);
+    participant = participant{1};
+    disp(['*** Processing participant ' participant '... ***']);
+    cfg = initialize_participant_cfg(experiment, participant, ICA);
     
     if ~cfg.proc_data.(cfg.subjectstr).data_available
+        disp('*** No data available. Skipping... ***');
         continue
     end
 
     %% Read data
-    initialize_participant_data(experiment, participant , ICA); 
+    initialize_participant_data(experiment, participant, ICA); 
 
     %% Filter
-    my_filter(experiment, participant , ICA);
+    my_filter(experiment, participant, ICA, true);
 
     %% Epoch data
-    epoch_data_1s(experiment, participant , ICA);
+    epoch_data_1s(experiment, participant, ICA);
 
     %% Reject artifacts
 %     reject_artifacts_manual(experiment, participant, ICA);
 
-    
+    %%
+    spectral_analysis(experiment, participant, ICA);
 end
 
 %% Grand average
