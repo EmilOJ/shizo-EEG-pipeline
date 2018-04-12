@@ -23,5 +23,8 @@ function [] = epoch_data_1s(experiment, participant, ICA)
     cfg = [];
     cfg.trials = trials;
     data = ft_selectdata(cfg, data);
+    disp(['*** Saving ' num2str(length(trials)) ' trials to ' cfg_1.files.raw_filtered_epoched ' ***']);
     save(cfg_1.files.raw_filtered_epoched, 'data');
+    
+    
 end

@@ -178,7 +178,7 @@ elseif ~isempty(mask)
     % NOTE: if you set hpos and/or vpos, newpoints is not empty, but nothing
     % needs to be fixed (this fixme screws up things, then)
   end
-  for i=1:length(mask)
+  for i=1:1
     mask{i}(:, 1) = mask{i}(:, 1)*xScaling+hpos;
     mask{i}(:, 2) = mask{i}(:, 2)*yScaling+vpos;
     mask{i}(end+1, :) = mask{i}(1, :);                   % force them to be closed

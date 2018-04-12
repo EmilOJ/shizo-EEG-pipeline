@@ -16,6 +16,7 @@ participants = {...
 };
     
 ICA = false;
+% experiment = 'eyes_open';
 experiment = 'eyes_closed';
 
 for i = 1:length(participants)
@@ -30,19 +31,23 @@ for i = 1:length(participants)
     end
 
     %% Read data
-    initialize_participant_data(experiment, participant, ICA); 
+%     initialize_participant_data(experiment, participant, ICA); 
 
     %% Filter
-    my_filter(experiment, participant, ICA, true);
+%     my_filter(experiment, participant, ICA, true);
 
     %% Epoch data
-    epoch_data_1s(experiment, participant, ICA);
+%     epoch_data_1s(experiment, participant, ICA);
 
     %% Reject artifacts
 %     reject_artifacts_manual(experiment, participant, ICA);
 
     %%
-    spectral_analysis(experiment, participant, ICA);
+%     spectral_analysis(experiment, participant, ICA);
+    
+    %%
+    close all;
+    visualize_powerspectra(experiment, participant, ICA);
 end
 
 %% Grand average
