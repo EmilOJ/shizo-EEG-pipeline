@@ -13,3 +13,5 @@ https://www.sciencedirect.com/science/article/pii/S1746809415000506
 2015. LZC med permutation "PLZC". God guide til metoden. De foreslår at PLZC er bedre end LZC til EEG.
 # Lempel Ziv Complexity of EEG in Depression
 https://link.springer.com/chapter/10.1007/978-3-319-11128-5_15
+# mathworks file exchange: calc-lz-complexity
+http://www.mathworks.com/matlabcentral/fileexchange/38211-calc-lz-complexity
