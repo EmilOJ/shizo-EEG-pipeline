@@ -1,5 +1,5 @@
 function [avg] = compute_ERP_avg(experiment, participant, condition, alignment)
-    add_filedtrip_path();
+    ;
     cfg = initialize_participant_cfg(experiment, participant);
     
     

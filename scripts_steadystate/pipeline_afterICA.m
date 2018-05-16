@@ -1,6 +1,6 @@
 function [cfg data] = pipeline_afterICA(experiment, participant)
  %% Load data
-    add_filedtrip_path();
+    ;
     cfg = initialize_participant_cfg(experiment, participant);
     cfg.dataset = [cfg.subjectdir cfg.subjectstr '.bdf'];
     
