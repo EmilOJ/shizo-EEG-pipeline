@@ -1,3 +1,5 @@
+# Roskilde schizophenia EEG pipeline
+
 ## Getting started
 
 ### Installing dependencies
@@ -27,3 +29,7 @@ my_fieldtrip_path = '/Users/emiljohansen/Documents/Laosdirg/Roskilde/roskilde-ee
 ### Run the analysis
 
 Run the file `run_pipeline_steadystate.m`
+
+## Development
+
+## 
