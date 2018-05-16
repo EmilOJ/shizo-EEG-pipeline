@@ -1,1 +1,1 @@
-fieldtrip -u https://github.com/fieldtrip/fieldtrip.git
+fieldtrip -u https://gitlab.com/laosdirg/fieldtrip.git
