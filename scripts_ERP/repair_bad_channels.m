@@ -1,5 +1,5 @@
 function [] = repair_bad_channels(experiment, participant) 
-    add_filedtrip_path();
+    ;
     
 %     cfg = initialize_participant_cfg(experiment, participant);
     

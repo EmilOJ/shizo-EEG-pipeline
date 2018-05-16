@@ -1,5 +1,5 @@
 clc; close all; clear all;
-add_filedtrip_path()
+
 
 participants = {...
     '1001'
@@ -30,18 +30,18 @@ for i = 1:length(participants)
         continue
     end
 
-    %% Read data
-    initialize_participant_data(experiment, participant, ICA); 
-
-    %% Filter
-    my_filter(experiment, participant, ICA, true);
-
-    %% Epoch data
-    epoch_data_1s(experiment, participant, ICA);
-
-    %% Reject artifacts (manually) - only first time
+%     %% Read data
+%     initialize_participant_data(experiment, participant, ICA); 
+% 
+%     %% Filter
+%     my_filter(experiment, participant, ICA, true);
+% 
+%     %% Epoch data
+%     epoch_data_1s(experiment, participant, ICA);
+% 
+%     %% Reject artifacts (manually) - only first time
     %% Should be added to proc_notes.xlsx
-%     reject_artifacts_manual(experiment, participant, ICA);
+    reject_artifacts_manual(experiment, participant, ICA);
 
     %%
     spectral_analysis(experiment, participant, ICA);
