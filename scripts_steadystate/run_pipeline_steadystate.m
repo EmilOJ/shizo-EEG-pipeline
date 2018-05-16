@@ -1,5 +1,5 @@
 clc; close all; clear all;
-add_filedtrip_path()
+
 
 participants = {...
     '1001'

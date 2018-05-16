@@ -1,5 +1,5 @@
 function [] = my_filter(experiment, participant, ICA, only_demean)    
-    add_filedtrip_path();
+    ;
     cfg = initialize_participant_cfg(experiment, participant, ICA);
     if ICA
         cfg.inputfile   = [cfg.subjectdir cfg.subjectstr '_ICApruned.mat']; 
