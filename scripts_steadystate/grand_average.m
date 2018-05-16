@@ -1,6 +1,6 @@
 function [] = grand_average(experiment, subjects)
    
-   add_filedtrip_path();
+   ;
    cfg = initialize_participant_cfg(experiment, '1001');
     
    counter = 1;

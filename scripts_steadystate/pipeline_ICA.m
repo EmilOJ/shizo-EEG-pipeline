@@ -14,7 +14,7 @@ function [] = pipeline_ICA(experiment, participant)
     % 11. extract events      
     
     tic
-    add_filedtrip_path();
+    ;
     cfg_epoch_1s = initialize_participant_cfg(experiment, participant);
     cfg_epoch_1s.dataset                 = cfg_epoch_1s.files.raw;
 

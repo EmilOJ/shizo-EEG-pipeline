@@ -1,5 +1,5 @@
 function [] = GA_inspect(experiment, channels)
-   add_filedtrip_path();
+   ;
    cfg = initialize_participant_cfg(experiment, 2);
    
    standardball = load([cfg.ERPdir 'standardball_GA.mat']);
