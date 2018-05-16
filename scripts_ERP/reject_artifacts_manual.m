@@ -1,5 +1,5 @@
 function [] = reject_artifacts_manual(experiment, participant, ICA)
-    add_filedtrip_path();
+    ;
     
     
     for condition = {'standardball', 'oddball'}
