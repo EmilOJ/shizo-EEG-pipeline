@@ -1,6 +1,4 @@
 clc; close all; clear all;
-
-
 participants = {...
     '1001'
 %     '1003'
