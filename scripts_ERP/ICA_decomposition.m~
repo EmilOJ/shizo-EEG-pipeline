@@ -34,8 +34,8 @@ function [ICA_components] = ICA_decomposition(pars, data)
         ICA_components = ft_componentanalysis(cfg, data_epoch_1s);
         
         % Show elapsed time
-        ICA_elapsed_time = toc;
-        disp(['Preprocessing time: '  num2str(ICA_elapsed_time) ' seconds']);
+    preproc_time = toc;
+    disp(['Preprocess	
     catch
         disp('Could not run ICA');
     end
