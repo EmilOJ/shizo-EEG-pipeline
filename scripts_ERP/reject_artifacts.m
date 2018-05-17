@@ -1,30 +1,28 @@
-function [cfg] = reject_artifacts(experiment, participant, alignment)
-%     cfg.continuous = 'yes';
-%     cfg.artfctdef.clip.channel = 1:128;    
-%     cfg = ft_artifact_clip(cfg);
-%     
-%     cfg.artfctdef.jump.interactive = 'yes';
-%     cfg.artfctdef.zvalue.interactive = 'yes';
+function [data] = reject_artifacts(pars, data)
+    % Automatically rejects artifacts from epoched data using thresholding. 
+    % `data` is assumed to be epoched already which means that `pars` must
+    % contain a pars.trl field.
     
-%     cfg.artfctdef.jump.channel = 1:128;    
-%     cfg = ft_artifact_jump(cfg);
-%     
-%     cfg.artfctdef.muscle.channel = 1:128;    
-%     cfg = ft_artifact_muscle(cfg);
-%     
-%     cfg = ft_rejectartifact(cfg);
-%     
-    for condition = {'gram', 'lex'}
-        icondition = condition{1};
-        cfg = initialize_participant_cfg(experiment, participant);
-        cfg.inputfile = [cfg.files.ICA_pruned_filtered_ icondition '_' alignment];
-
-
-        cfg.method   = 'summary';
-        cfg.outputfile = [cfg.files.ICA_pruned_filtered_ icondition '_' alignment];
-        data_clean   = ft_rejectvisual(cfg);
+    if ~isfield(pars, 'trl')
+        error(['Error in reject_artifacts: parameter ''trl'' not found'])
     end
-
-   
+    
+    cfg = [];
+    cfg.trl = pars.trl;
+    cfg.continuous = 'no';
+    
+    % Thresholding artifact rejection
+    cfg.artfctdef.threshold.channel = get_channellist();
+    cfg.artfctdef.threshold.bpfilter  = 'yes';
+    cfg.artfctdef.threshold.bpfreq    = [0.3 105];
+    cfg.artfctdef.threshold.bpfiltord = 10;
+    cfg.artfctdef.threshold.range = 400;     % µV
+    [cfg, artifact_threshold] = ft_artifact_threshold(cfg, data);
+    
+    % Config for final artifact rejection
+    cfg.artfctdef.threshold.artifact = artifact_threshold;
+    
+    % Final artifact rejection
+    data = ft_rejectartifact(cfg, data);
 end
 
