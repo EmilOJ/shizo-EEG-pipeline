@@ -5,7 +5,7 @@ function [data] = rereference(pars, data)
     cfg.refchannel = get_channellist();
     cfg.channel = get_channellist();
     
-    %TODO: Add cfg from pars
+    merge_pars_with_cfg(pars, cfg, 'rereference');
     
     data = ft_preprocessing(cfg, data);
 end
