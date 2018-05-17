@@ -1,5 +1,6 @@
 function [ICA_components] = ICA_decomposition(pars, data)
     % Performs ICA decomposition. Outputs the ICA components for inspection   
+    
     disp('*** Performing ICA decomposition ***');
     
     
