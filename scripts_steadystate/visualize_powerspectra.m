@@ -44,8 +44,6 @@ for i = 1:2
     ylim(range_log_freq)
 end
 
-load('layout2.mat');
-
 range_freq = [min(min(freq_eyes_closed.powspctrm(:)), min(freq_eyes_open.powspctrm(:))), max(max(freq_eyes_closed.powspctrm(:)), max(freq_eyes_open.powspctrm(:)))];
 range_freq = [0 5];
 
@@ -56,7 +54,7 @@ cfg.xlim = [7.5 12.5];
 cfg.ylim = [1 2];                  
 cfg.zlim = range_freq;           
 cfg.baseline = 'no';
-cfg.layout = lay;
+cfg.layout = get_layout();
 cfg.marker = 'labels';
 cfg.markerfontsize = 11;
 
