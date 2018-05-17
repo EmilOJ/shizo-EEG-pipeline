@@ -1,4 +1,4 @@
-function [] = check_ICA_components(pars, ICA_components)
+function [] = ICA_inspect_components(pars, ICA_components)
     %%%
     % Visualizes ICA components and corresponding time-domain data for
     % artifact identification. Components containing only artifacts should
