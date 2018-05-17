@@ -1,5 +1,5 @@
-pars = initialize_pars()
-
+function pars = initialize_pars()
+pars.experiment = 'eyes-closed'
 %Names of the moduels in the order they should be run.
 pars.module_order= {'module1','module2','module3'} 
 
@@ -9,5 +9,13 @@ pars.module_order= {'module1','module2','module3'}
 % = somevalue
 
 %spectral_analysis
-pars.spectra_analysis.par1 = 'somevalue';
+pars.spectral_analysis.par1 = 'somevalue';
+pars.spectral_analysis.experiment = 'yoyo';
+pars.spectral_analysis.ICA ='false';
 
+%initialize paths from my_config:
+[pars.my_root, pars.my_fieldtrip_path, pars.my_output_folder] = my_config();
+
+%create time stamp
+pars.time_stamp = now;
+pars.date_time = datetime('now');
