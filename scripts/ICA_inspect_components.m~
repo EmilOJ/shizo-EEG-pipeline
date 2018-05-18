@@ -14,20 +14,14 @@ function [] = ICA_inspect_components(pars, ICA_components)
     %   pars.blocksize
     %%%
     
-    % Topoplot config
     cfg.component = [1:20]; % Components to show
     cfg.layout      = get_layout();
     cfg.comment     = 'no';
-    
-    % Databrowser config
-    cfg.channel     = [1:5];
-    cfg.viewmode    = 'component';
-    cfg.continuous  = 'yes';
-    cfg.blocksize   = 10; %seconds
-    
-    cfg = merge_pars_with_cfg(pars, cfg, 'ICA_inspect_components');
-    
+    % TODO: Read parameters from pars
     ft_topoplotIC(cfg, ICA_components); % Plot components
     
+    
+    % TODO: Read parameters from pars
     ft_databrowser(cfg, comp);
+
 end
