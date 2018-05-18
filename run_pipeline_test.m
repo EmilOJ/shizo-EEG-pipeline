@@ -1,5 +1,9 @@
 %clc; close all; clear all;
-pars = initialize_pars('participant','1002','experiment','eyes-closed');
+addpath(genpath('./scripts'))
+addpath(genpath('./scripts_ERP'))
+addpath(genpath('./scripts_steadystate'))
+addpath('./mpm/mpm-packages/fieldtrip'); %fieldtrip path
+pars = initialize_pars('participant','s1001','experiment','steady_state');
 
 %importing initial data. should be /data/"patientnumber"/data_ini.mat
 if exist([pars.my_data_folder,filesep,pars.participant,filesep,'data_init.mat']) == 0
