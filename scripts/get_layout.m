@@ -1,4 +1,4 @@
 function [layout] = get_layout()
-    load('layout2.mat');
+    load('layout.mat');
     layout = lay;
 end
