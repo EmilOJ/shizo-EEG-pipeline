@@ -6,7 +6,7 @@ function pars = initialize_pars(varargin)
  pars.module_order= {'rereference'} ;
 
 % Initialize paths from my_config:
-[pars.my_root, pars.my_output_folder, pars.my_data_folder] = my_config();
+[pars.my_root, pars.my_data_folder] = my_config();
 
 % Create time stamp
 pars.time_stamp = now;

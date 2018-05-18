@@ -22,16 +22,15 @@ for i_module = 1:current_module
     end
     
     % get parameter names used for module i
-    if isfield(pars,module_name) == 0
-        error(['Can''t find parameters for ',module_name])
-    else
+    if isfield(pars,module_name) == 1
         names = fieldnames(pars.(module_name));
-    end
-    if isfield(pars_old,module_name) == 0
-        use_data_file = 0;
-        return ;
     else
+        names = []; %Parameters doesn't exist
+    end
+    if isfield(pars_old,module_name) == 1
         names_old = fieldnames(pars_old.(module_name));
+    else
+        names_old = [];
     end
     
     %compare
