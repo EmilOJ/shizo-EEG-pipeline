@@ -1,4 +1,5 @@
 function initialize_paths(pars)
+%Adding the correct paths as defined in initialize_pars()
 addpath(genpath([pars.my_root,filesep,'scripts']))
 addpath(genpath([pars.my_root,filesep,'scripts_ERP']))
 addpath(genpath([pars.my_root,filesep,'scripts_steadystate']))
