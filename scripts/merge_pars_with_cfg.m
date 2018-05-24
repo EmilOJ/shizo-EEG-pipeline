@@ -9,6 +9,7 @@ if isfield(pars,module_name)
         cfg.(module_name).(par_name) = par_val;
     end
 else
-    warning(['No pars defined for module ', module_name])
-    
+    warning('off', 'backtrace');
+    warning(['No pars defined for module ', module_name '. Using default parameters.']);
+    warning('on', 'backtrace');
 end

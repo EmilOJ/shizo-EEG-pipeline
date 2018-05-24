@@ -1,5 +1,5 @@
 function [] = initialize_participant_data(participant) 
-    [my_root, my_output_folder, my_data_folder]  = my_config();
+    [my_root, my_data_folder]  = my_config();
     
     cfg.dataset = [my_data_folder,filesep, participant ,filesep, participant '.e'];
     cfg.continuous = 'yes';

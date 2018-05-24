@@ -11,7 +11,7 @@ function proc_data = read_proc_notes(experiment)
     [num, txt, raw] = xlsread([my_root filesep 'proc_notes_' [experiment] '.xlsx']);
 
     for i = 2:17
-        subjstr = raw{i,1};
+        subjstr = [raw{i,1}];
         if strcmp(experiment, 'ERP')
             assign_data(2,'data_available');
             assign_data(3,'standardball_range');
