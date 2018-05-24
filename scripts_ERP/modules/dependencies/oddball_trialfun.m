@@ -1,15 +1,20 @@
 function [trl, event] = oddball_trialfun(cfg)
-    disp(['Extracting ' cfg.condition ' trials...']);
+    disp('*** Reading header and event information ***');
     hdr   = ft_read_header(cfg.dataset);
     event = ft_read_event(cfg.dataset);
     
-    data = ft_read_data(cfg.files.raw);
+    disp('*** Reading original data ***');
+    data = ft_read_data(cfg.dataset);
     
-    % Save the oddball or standardball channel
+    disp(['*** Extracting ' cfg.condition ' trials... ***']);
+        % Save the oddball or standardball channel
+    [bad_trials_standardball, bad_trials_oddball] = get_triallist(cfg.pars);
     if strcmp(cfg.condition, 'standardball') 
+        bad_trials = bad_trials_standardball;
         ball    = data(29,:);
         idx_range = 1:900;
     else
+        bad_trials = bad_trials_oddball;
         ball    = data(28,:);
         idx_range = 1:100;
     end
@@ -26,6 +31,11 @@ function [trl, event] = oddball_trialfun(cfg)
     ballrisingindex     = find(ballrising);
     ballrisingindex     = ballrisingindex(idx_range);
     
+%     find(diff(ballrisingindex) / hdr.Fs > 1.1)'
+%     if length(find(diff(ballrisingindex) / hdr.Fs > 2))
+%         error("Epoch larger than 2 second found. Aborting...");
+%     end
+   
     pretrig  = 0.2; %s
     posttrig = 0.7; %s
     
@@ -38,11 +48,10 @@ function [trl, event] = oddball_trialfun(cfg)
     offset = repmat(pretrig, length(ballrisingindex), 1);
     trl = [trl_begin' trl_end' offset];
     
-    %% Remove previously rejected trials 
-    trials_to_reject = cfg.proc_data.(cfg.subjectstr).(['bad_trials_' cfg.condition]);
-    number_of_trials_to_reject = length(trials_to_reject);
+    %% Remove previously rejected trials
+    number_of_trials_to_reject = length(bad_trials);
     
     if number_of_trials_to_reject > 0
-        trl(trials_to_reject,:) = [];
+        trl(bad_trials,:) = [];
     end
 end
