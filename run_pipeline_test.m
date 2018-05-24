@@ -1,4 +1,5 @@
 clc; close all; clear all;
+tic;
 pars = struct;
 
 %% Custom settings
@@ -19,6 +20,8 @@ for i_module = 1:length(pars.module_order) %iterate through all modules
    data = run_module(pars, data, i_module);
 end
 
+
+disp(['*** Pipeline finished running in ', num2str(toc), ' seconds ***']);
 
 %% Helper functions
 function [pars, data] = init_pipeline(pars)
