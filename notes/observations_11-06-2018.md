@@ -7,7 +7,7 @@ Very clear eyeblinks, especially in Fp1 and Fp2
 
 ![alt text](img/fp1fp2noise.png)
 
-![alt text](img/test.svg)
+![alt text](img/test.png)
 
 ## Pipeline documentation
 
