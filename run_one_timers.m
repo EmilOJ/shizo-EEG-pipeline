@@ -3,14 +3,14 @@ tic;
 pars = struct;
 
 %% Custom settings
-pars.participant = 's1003';
+pars.participant = 's1024';
 
 %% Initialization
 [pars, data] = init_pipeline(pars);
 
 %% Run one-timer
 ICA_inspect_components(pars);
-visual_inspect_data(pars, data);
+% visual_inspect_data(pars, data);
 
 %% Helper functions
 function [pars, data] = init_pipeline(pars)

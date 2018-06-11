@@ -10,7 +10,7 @@ function proc_data = read_proc_notes(pars)
     [my_root my_data_folder] = my_config();
     [num, txt, raw] = xlsread([my_data_folder filesep 'proc_notes.xlsx']);
 
-    for i = 2:17
+    for i = 2:25
         subjstr = [raw{i,1}];
         if strcmp(pars.data_type, 'epoch')
             assign_data(2,'data_available');

@@ -1,21 +1,22 @@
-function [] = grand_average(pars, data)
-   
-   cfg = initialize_participant_cfg(experiment, '1001');
-    
-   counter = 1;
-   for i = 1:length(subjects)
-       subject = subjects{i};
+function [] = grand_average(pars)
+   for icondition = 1:length(pars.conditions)
+       averages_temp = struct;
+       condition = pars.conditions{icondition};
+
+       for i = 1:length(pars.participants)
+           participant = pars.participants{i};
+           data = get_latest_data(pars, participant);
+           data = data.(condition);
+           
+           averages_temp.(participant) = compute_ERP_avg(pars, data);
+       end
        
-           avg_standardball{counter} = compute_ERP_avg(experiment, subject, 'standardball');
-           avg_oddball{counter} = compute_ERP_avg(experiment, subject, 'oddball');
-           counter = counter +1 ;
-      
+       cfg.channel = 'all';
+       grand_average = ft_timelockgrandaverage(cfg, averages_temp.(participant));
+       
+       save([pars.my_data_folder filesep 'GA_' condition '.mat'], 'grand_average');
    end
    
-   save([cfg.ERPdir 'standardball_averages.mat'], 'avg_standardball');
-   save([cfg.ERPdir 'oddball_averages.mat'], 'avg_oddball');
-   
- 
    
 %    % ANOVA
 %     disp('calculating anova table');
@@ -33,11 +34,4 @@ function [] = grand_average(pars, data)
 %     anovas(anovas > 0.05) = 1;
 
 
-   
-   cfg.outputfile = [cfg.ERPdir 'standardball_GA.mat'];
-   ft_timelockgrandaverage(cfg, avg_standardball{:});
-   
-   cfg.outputfile = [cfg.ERPdir 'oddball_GA.mat'];
-   ft_timelockgrandaverage(cfg, avg_oddball{:});
-   
 end

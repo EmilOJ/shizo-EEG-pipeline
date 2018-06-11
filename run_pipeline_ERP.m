@@ -3,32 +3,33 @@ tic;
 pars = struct;
 
 participants = {
-    's1001'
-%     's1003'
-%     's1004'
-%     's1005'
-%     's1006'
-%     's1007'
-%     's1008'
-%     's1009'
-%     's1010'
-%     's1011'
-%     's1012'
-%     's1013'
-%     's1014'
-%     's1015'
-%     's1016'
-%     's1017'
-%     's1018'
-%     's1019'
-%     's1020'
-%     's1021'
-%     's1022'
-%     's1023'
-%     's1024'
-};
+%         's1001'
+%         's1003'
+%         's1004'
+%         's1005'
+%         's1006'
+%         's1007'
+%         's1008'
+%         's1009'
+%         's1010'
+%         's1011'
+%         's1012'
+%         's1013'
+%         's1014'
+%         's1015'
+%         's1016'
+        's1017'
+        's1018'
+        's1019'
+        's1020'
+        's1021'
+        's1022'
+        's1023'
+        's1024'
+    };
 
 for participant = 1:length(participants)
+    
     disp(['*********** Processing participant: ' participants{participant} ' ***********']);
     pars.participant = participants{participant};
     
@@ -38,31 +39,39 @@ for participant = 1:length(participants)
     pars.data_type = 'epoch';
     
     pars.epoch.latency = 0.2; %seconds
+    pars.ICA_reconstruction.lol = 'hej';
+    
+    pars.ke_filter.lpfreq = 40;
 
-%     Names of the modules in the order they should be run.
+    % Names of the modules in the order they should be run.
+%      pars.module_order= {
+%         'ICA_decomposition'
+%     };
+   
     pars.module_order= {
         % Before Epoch
         'ICA_reconstruction'
-        'visual_inspect_data'
         'ke_filter'
-        'ke_rereference'
+%         'ke_rereference'
         'epoch'
         
         % After Epoch
         'epochs_reject_artifacts_auto'
     };
-% 
-%      pars.module_order= {
-%         % Before Epoch
-%         'ICA_decomposition'
-%     };
+
 
     %% Initialization
     [pars, data] = init_pipeline(pars);
 
     %% Pipeline
     for i_module = 1:length(pars.module_order) %iterate through all modules
-       data = run_module(pars, data, i_module);
+       if i_module == length(pars.module_order)
+           is_last_module = true;
+       else
+           is_last_module = false;
+       end
+       
+       data = run_module(pars, data, i_module, is_last_module);
     end
 end
 
@@ -89,7 +98,7 @@ function [] = init_data(pars)
     end
 end
 
-function [data] = run_module(pars, data, module)
+function [data] = run_module(pars, data, module, is_last_module)
    disp(['**** Running module: ', pars.module_order{module}, ' ****']);
    data_exists = check_for_old_data(pars, module);
    if data_exists
@@ -109,10 +118,17 @@ function [data] = run_module(pars, data, module)
           data = eval([pars.module_order{module},'(pars,data);']);
       end
       
+      disp('**** Saving processing step to disk... ***');
       %saving both data and pars used for the data
+      if is_last_module
+          disp('**** Saving processing step to disk... ***');
+          save([pars.subject_data_dir, filesep, 'data_out_module_',num2str(module),'_final.mat'],'data')
+          save([pars.subject_data_dir, filesep, 'pars_used_for_module_',num2str(module),'_final.mat'],'pars')
+      else
           disp('**** Saving processing step to disk... ***');
           save([pars.subject_data_dir, filesep, 'data_out_module_',num2str(module),'.mat'],'data')
           save([pars.subject_data_dir, filesep, 'pars_used_for_module_',num2str(module),'.mat'],'pars')
+      end
    end
 end
 

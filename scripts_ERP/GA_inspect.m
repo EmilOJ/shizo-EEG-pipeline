@@ -1,28 +1,27 @@
-function [] = GA_inspect(experiment, channels)
-   ;
-   cfg = initialize_participant_cfg(experiment, 2);
+function [] = GA_inspect(pars)
+   standardball = load([pars.my_data_folder filesep 'GA_standardball.mat']);
+   oddball = load([pars.my_data_folder filesep 'GA_oddball.mat']);
    
-   standardball = load([cfg.ERPdir 'standardball_GA.mat']);
-   oddball = load([cfg.ERPdir 'oddball_GA.mat']);
+   cfg.channels = {'Fp1';'Fp2';'F3';'F4';'C3';'C4';'P3';'P4';'O1';'O2';'F7';'F8';'T7';'T8';'P7';'P8';'T9';'T10';'Fz';'Cz';'Pz';'F10';'F9';'P9';'P10'};
    
-   
+   cfg = merge_pars_with_cfg(pars, cfg, 'GA_inspect');
   
     %% GA butterfly
    figure;
    for j = 1:2
        if j == 1
            plot_title = 'Standardball condition';
-           y = standardball.grandavg.avg;
-           time = standardball.grandavg.time;
+           y = standardball.grand_average.avg;
+           time = standardball.grand_average.time;
        else
            plot_title = 'Oddball condition';
-           y = oddball.grandavg.avg;
-           time = oddball.grandavg.time;
+           y = oddball.grand_average.avg;
+           time = oddball.grand_average.time;
        end
        subplot(2,1,j);
        
        for i=1:size(y,1)
-           plot(time, y(i,:))% - y(i,1));%-mean(y(i,:),2));
+           plot(time, y(i,:) - y(i,1) );%-mean(y(i,:),2));
            hold on;
        end
        axis tight;
@@ -31,7 +30,7 @@ function [] = GA_inspect(experiment, channels)
 %            xlim([2 3]);
 %        end
 %        ylim([-2 2])
-       ylim([-5 6]);
+       ylim([-5 10]);
        title(plot_title);
        hold off;
        grid on;
@@ -53,20 +52,20 @@ function [] = GA_inspect(experiment, channels)
 % %    end
 %    figure; ft_multiplotER(cfg, standardball.grandavg, oddball.grandavg);
 %    legend('standardball','oddball');
-   
-   figure; counter = 1;
-   for chan = channels
-       subplot(length(channels),1,counter);
-       cfg.channel = chan;
-       ft_singleplotER(cfg, standardball.grandavg, oddball.grandavg);
-       set(gca,'Ydir','reverse');
-       legend('standardball','oddball');
-       counter = counter + 1;
-   end
-   
-   clear standardball;
-   clear oddball;
-   
+%    
+%    figure; counter = 1;
+%    for chan = cfg.channels
+%        subplot(length(cfg.channels),1,counter);
+%        cfg.channel = chan;
+%        ft_singleplotER(cfg, standardball.grand_average, oddball.grand_average);
+%        set(gca,'Ydir','reverse');
+%        legend('standardball','oddball');
+%        counter = counter + 1;
+%    end
+%    
+%    clear standardball;
+%    clear oddball;
+%    
  
     
    
