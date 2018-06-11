@@ -19,6 +19,7 @@ function proc_data = read_proc_notes(pars)
             assign_data(5,'bad_trials_standardball');
             assign_data(6,'bad_trials_oddball');
             assign_data(7,'bad_channels', 'c');
+            assign_data(8,'ICA_EOG');
         elseif strcmp(pars.data_type, 'continuous')
             assign_data(2,'data_available');
             assign_data(3,'eyes_closed_start');
@@ -26,6 +27,7 @@ function proc_data = read_proc_notes(pars)
             assign_data(5,'eyes_open_start');
             assign_data(6,'eyes_open_stop');
             assign_data(7,'bad_channels', 'c');
+            assign_data(8,'ICA_EOG');
         else
             msgID = 'read_proc_notes:BadArgument';
             msg = 'experiement has to be either ERP og steady_state. Neither was provided';

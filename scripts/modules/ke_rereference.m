@@ -1,4 +1,4 @@
-function [data] = rereference(pars, data)
+function [data] = ke_rereference(pars, data)
     cfg = [];
     cfg.reref = 'yes';
     cfg.refmethod = 'avg';

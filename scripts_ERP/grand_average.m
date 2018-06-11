@@ -1,6 +1,5 @@
-function [] = grand_average(experiment, subjects)
+function [] = grand_average(pars, data)
    
-   ;
    cfg = initialize_participant_cfg(experiment, '1001');
     
    counter = 1;

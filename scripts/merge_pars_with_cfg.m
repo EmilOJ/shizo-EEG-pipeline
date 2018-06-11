@@ -6,7 +6,7 @@ if isfield(pars,module_name)
     for ipar = 1: length(names) %go trough all of them
         par_name = names{ipar};
         par_val = pars.(module_name).(par_name);
-        cfg.(module_name).(par_name) = par_val;
+        cfg.(par_name) = par_val;
     end
 else
     warning('off', 'backtrace');

@@ -30,22 +30,14 @@ function [trl, event] = oddball_trialfun(cfg)
     %find index for changes
     ballrisingindex     = find(ballrising);
     ballrisingindex     = ballrisingindex(idx_range);
-    
-%     find(diff(ballrisingindex) / hdr.Fs > 1.1)'
-%     if length(find(diff(ballrisingindex) / hdr.Fs > 2))
-%         error("Epoch larger than 2 second found. Aborting...");
-%     end
    
-    pretrig  = 0.2; %s
-    posttrig = 0.7; %s
+    latency  = cfg.latency; %s
+    latency = round(latency * hdr.Fs); %convert to samples
     
-    pretrig = round(pretrig * hdr.Fs); %convert to samples
-    posttrig = round(posttrig * hdr.Fs); %convert to samples
-
-    trl_begin = ballrisingindex + pretrig; % + hdr.Fs*cfg.baselinewindow(1); %Baseline correction
-    trl_end = ballrisingindex + posttrig;
+    trl_begin = ballrisingindex + latency;
+    trl_end = ballrisingindex + (cfg.trllength * hdr.Fs) + latency;
     
-    offset = repmat(pretrig, length(ballrisingindex), 1);
+    offset = repmat(latency, length(ballrisingindex), 1);
     trl = [trl_begin' trl_end' offset];
     
     %% Remove previously rejected trials
