@@ -30,7 +30,7 @@ function [] = GA_inspect(pars)
 %            xlim([2 3]);
 %        end
 %        ylim([-2 2])
-       ylim([-5 10]);
+       ylim([-12 12]);
        title(plot_title);
        hold off;
        grid on;

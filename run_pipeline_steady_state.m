@@ -2,63 +2,58 @@ clc; close all; clear all;
 tic;
 pars = struct;
 
-participants = {
-%         's1001'
-%         's1003'
-%         's1004'
-%         's1005'
-%         's1006'
-%         's1007'
-%         's1008'
-%         's1009'
-%         's1010'
-%         's1011'
-%         's1012'
-%         's1013'
-%         's1014'
-%         's1015'
-%         's1016'
-%         's1017'
-%         's1018'
-%         's1019'
-%         's1020'
+
+
+parfor participant = 1:22%length(participants)
+    
+    participants = {
+        's1001'
+        's1003'
+        's1004'
+        's1005'
+        's1006'
+        's1007'
+        's1008'
+        's1009'
+        's1010'
+        's1011'
+        's1012'
+        's1013'
+        's1014'
+        's1015'
+        's1016'
+        's1017'
+        's1018'
+        's1019'
+        's1020'
 %         's1021'
-%         's1022'
-%         's1023'
+        's1022'
+        's1023'
         's1024'
     };
-
-for participant = 1:length(participants)
     
     disp(['*********** Processing participant: ' participants{participant} ' ***********']);
     pars.participant = participants{participant};
     
     %% Custom settings
-    % One of two:
-%     pars.data_type = 'continuous';
-    pars.data_type = 'epoch';
+    pars.data_type = 'continuous'; % or ERP
     
-    pars.epoch.latency = 0.2; %seconds
- 
+    pars.ke_filter.lpfreq = 105;
+    pars.ke_filter.lpfiltdf  = 2;
     
-    pars.ke_filter.lpfreq = 40;
-
-    % Names of the modules in the order they should be run.
-%      pars.module_order= {
-%         'ICA_decomposition'
+    pars.spectral_analysis.rerun = 'yes';
+%     pars.spectral_analysis.conditions = {
+%         'eyes_closed'
+%         'eyes_open'
 %     };
-   
-    ERP
+
+    % Steady-state
     pars.module_order= {
-        % Before Epoch
         'ICA_reconstruction'
         'ke_filter'
-%         'ke_rereference'
-        'epoch'
-        
-        % After Epoch
-        'epochs_reject_artifacts_auto'
+        'spectral_analysis'
     };
+
 
     %% Initialization
     [pars, data] = init_pipeline(pars);
@@ -128,7 +123,7 @@ function [data] = run_module(pars, data, module, is_last_module)
           disp('**** Saving processing step to disk... ***');
           save([pars.subject_data_dir, filesep, 'data_out_module_',num2str(module),'.mat'],'data')
           save([pars.subject_data_dir, filesep, 'pars_used_for_module_',num2str(module),'.mat'],'pars')
-   end
+      end
    end
 end
 

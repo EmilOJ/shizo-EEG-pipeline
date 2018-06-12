@@ -4,13 +4,13 @@ pars = struct;
 [pars.my_root, pars.my_data_folder] = my_config();
 
 pars.conditions = {
-    'standardball'
-    'oddball'
+    'eyes_closed'
+    'eyes_open'
 };
 
 pars.participants = {
-%     's1001'
-%     's1003'
+    's1001'
+    's1003'
 %     's1004'
 %     's1005'
 %     's1006'
@@ -34,10 +34,11 @@ pars.participants = {
 %         's1024'
 };
 
-grand_average(pars);
+% spectral_grand_average(pars);
 
-GA_inspect(pars)
-saveas(1, 's1004_rereferenced_avg.png','png');
+pars.visualize_powerspectra.freqrange = [1, 5]; %Hz
+visualize_powerspectra(pars)
+% saveas(1, 's1004_rereferenced_avg.png','png');
 
 
 

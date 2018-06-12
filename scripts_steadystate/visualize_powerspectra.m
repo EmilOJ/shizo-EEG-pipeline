@@ -1,14 +1,14 @@
-function [] = visualize_powerspectra(experiment, participant, ICA)
+function [] = visualize_powerspectra(pars)
+
+cfg.freqrange = [7.5 12.5];
+
+cfg = merge_pars_with_cfg(pars, cfg, 'visualize_powerspectra');
 
 
-freqvar = 'freq';
-cfg_eyes_open = initialize_participant_cfg('eyes_open', participant, ICA);
-cfg_eyes_closed = initialize_participant_cfg('eyes_closed', participant, ICA);
-
-freq_eyes_closed = load(cfg_eyes_closed.files.raw_filtered_epoched_spectral, freqvar);
-freq_eyes_closed = freq_eyes_closed.(freqvar)
-freq_eyes_open = load(cfg_eyes_open.files.raw_filtered_epoched_spectral, freqvar);
-freq_eyes_open = freq_eyes_open.(freqvar)
+freq_eyes_closed = importdata([pars.my_data_folder filesep 'GA_eyes_closed.mat']);
+freq_eyes_closed = freq_eyes_closed;
+freq_eyes_open = importdata([pars.my_data_folder filesep 'GA_eyes_open.mat']);
+freq_eyes_open = freq_eyes_open;
 
 log_freq_eyes_closed = log(freq_eyes_closed.powspctrm);
 log_freq_eyes_open = log(freq_eyes_open.powspctrm);
@@ -49,14 +49,14 @@ range_freq = [0 5];
 
 freq_eyes_closed_log = freq_eyes_closed;
 freq_eyes_closed_log.powspctrm = log(freq_eyes_closed_log.powspctrm);
-cfg = [];
-cfg.xlim = [7.5 12.5];                
-cfg.ylim = [1 2];                  
-cfg.zlim = range_freq;           
-cfg.baseline = 'no';
-cfg.layout = get_layout();
-cfg.marker = 'labels';
-cfg.markerfontsize = 11;
+cfg1 = [];
+cfg1.xlim = cfg.freqrange;                
+cfg1.ylim = [1 2];                  
+cfg1.zlim = range_freq;           
+cfg1.baseline = 'no';
+cfg1.layout = get_layout();
+cfg1.marker = 'labels';
+cfg1.markerfontsize = 11;
 
 
 figure; ft_topoplotTFR(cfg, freq_eyes_closed); colorbar
@@ -64,15 +64,15 @@ title('Eyes closed, ALPHA (7.5 - 12.5 Hz)');
 
 freq_eyes_open_log = freq_eyes_open;
 freq_eyes_open_log.powspctrm = log(freq_eyes_open_log.powspctrm);
-cfg = [];
-cfg.xlim = [7.5 12.5];                
-cfg.ylim = [1 25];                  
-cfg.zlim = range_freq;           
-cfg.baseline = 'no';
-cfg.layout = lay;
+cfg2 = [];
+cfg2.xlim = cfg.freqrange;                
+cfg2.ylim = [1 25];                  
+cfg2.zlim = range_freq;           
+cfg2.baseline = 'no';
+cfg2.layout = get_layout();
 
-cfg.marker = 'labels';
-cfg.markerfontsize = 11;
+cfg2.marker = 'labels';
+cfg2.markerfontsize = 11;
 
 
 figure; ft_topoplotTFR(cfg, freq_eyes_open); colorbar
