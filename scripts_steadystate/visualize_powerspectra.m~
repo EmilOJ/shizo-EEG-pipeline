@@ -15,7 +15,6 @@ log_freq_eyes_open = log(freq_eyes_open.powspctrm);
 
 range_log_freq = [min(min(log_freq_eyes_closed(:)), min(log_freq_eyes_open(:))), max(max(log_freq_eyes_closed(:)), max(log_freq_eyes_open(:)))];
 
-figure;
 for i = 1:2
     if i == 1
         experiment = 'eyes_closed';
@@ -24,8 +23,9 @@ for i = 1:2
         experiment = 'eyes_open';
         freq_to_visualize = freq_eyes_open;
     end
-  
-    subplot(2,2,i);
+    
+    figure;
+    subplot(2,2,1);
     colorplot = imagesc(freq_to_visualize.freq, 1:size(freq_to_visualize.label), log(freq_to_visualize.powspctrm));
 
 
@@ -37,24 +37,15 @@ for i = 1:2
     xlabel('Frequency [Hz]');
     ylabel('Channel');
 
-    subplot(2,2,i+2);
-    plot(freq_to_visualize.freq, (freq_to_visualize.powspctrm'));
+    subplot(2,2,2);
+    plot(freq_to_visualize.freq, log(freq_to_visualize.powspctrm'));
     xlabel('Frequency [Hz]');
     ylabel('log(Power)');
-%     ylim(range_log_freq)
+    ylim(range_log_freq)
 end
 
-set(gcf, 'Position', [100, 100, 1000, 600])
-
-% range_freq = [min(min(freq_eyes_closed.powspctrm(:)), min(freq_eyes_open.powspctrm(:))), max(max(freq_eyes_closed.powspctrm(:)), max(freq_eyes_open.powspctrm(:)))];
-% others
-range_freq = cfg.range_freq;
-
-% Delta
-% range_freq = [0 20];
-
-% low + high gamma
-% range_freq = [0 0.2];
+range_freq = [min(min(freq_eyes_closed.powspctrm(:)), min(freq_eyes_open.powspctrm(:))), max(max(freq_eyes_closed.powspctrm(:)), max(freq_eyes_open.powspctrm(:)))];
+range_freq = [0 5];
 
 freq_eyes_closed_log = freq_eyes_closed;
 freq_eyes_closed_log.powspctrm = log(freq_eyes_closed_log.powspctrm);
@@ -67,9 +58,9 @@ cfg1.layout = get_layout();
 cfg1.marker = 'labels';
 cfg1.markerfontsize = 11;
 
-figure;
-subplot(1,2,1); ft_topoplotTFR(cfg1, freq_eyes_closed); colorbar
-title(['Eyes closed, ' cfg.freqname ' (' num2str(cfg.freqrange(1)) ' - ' num2str(cfg.freqrange(2)) ' Hz)']);
+
+figure; ft_topoplotTFR(cfg1, freq_eyes_closed); colorbar
+title('Eyes closed, ALPHA (7.5 - 12.5 Hz)');
 
 freq_eyes_open_log = freq_eyes_open;
 freq_eyes_open_log.powspctrm = log(freq_eyes_open_log.powspctrm);
@@ -84,7 +75,5 @@ cfg2.marker = 'labels';
 cfg2.markerfontsize = 11;
 
 
-subplot(1,2,2); ft_topoplotTFR(cfg2, freq_eyes_open); colorbar
-title(['Eyes open, ' cfg.freqname ' (' num2str(cfg.freqrange(1)) ' - ' num2str(cfg.freqrange(2)) ' Hz)']);
-
-set(gcf, 'Position', [100, 100, 1000, 600])
+figure; ft_topoplotTFR(cfg2, freq_eyes_open); colorbar
+title('Eyes open, ALPHA (7.5 - 12.5 Hz)');

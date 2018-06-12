@@ -137,3 +137,58 @@ With average re-referencing:
 #### s1024 (PATIENT)
 
 ![alt text](img/s1024.png)
+
+## Frequency
+
+### Full spectrum (PATIENT)
+
+![alt text](img/full_spectrum_patient.png)
+
+### Full spectrum (CONTROL)
+
+![alt text](img/full_spectrum_control.png)
+
+### Patient
+
+#### delta (PATIENT)
+
+![alt text](img/topo_patient_delta.png)
+
+#### theta (PATIENT)
+
+![alt text](img/topo_patient_theta.png)
+
+#### alpha (PATIENT)
+
+![alt text](img/topo_patient_alpha.png)
+
+#### low gamma (PATIENT)
+
+![alt text](img/topo_patient_low_gamma.png)
+
+#### high_gamma (PATIENT)
+
+![alt text](img/topo_patient_high_gamma.png)
+
+### Control
+
+#### delta (CONTROL)
+
+![alt text](img/topo_control_delta.png)
+
+#### theta (CONTROL)
+
+![alt text](img/topo_control_theta.png)
+
+#### alpha (CONTROL)
+
+![alt text](img/topo_control_alpha.png)
+
+#### low gamma (CONTROL)
+
+![alt text](img/topo_control_low_gamma.png)
+
+#### high_gamma (CONTROL)
+
+![alt text](img/topo_control_high_gamma.png)
+
